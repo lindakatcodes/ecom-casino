@@ -1,25 +1,41 @@
-// import React from "react";
-import algoliasearch, {
-  type InitClientOptions,
-  SearchClient,
-} from "algoliasearch";
-import { InstantSearch, SearchBox } from "react-instantsearch";
+import { algoliasearch } from "algoliasearch";
+import "instantsearch.css/themes/satellite.css";
+import {
+  Configure,
+  Highlight,
+  Hits,
+  InstantSearch,
+  SearchBox,
+} from "react-instantsearch";
 
-const algolia = algoliasearch as unknown as (
-  appId: string,
-  apiKey: string,
-  options?: InitClientOptions
-) => SearchClient;
+const appId = import.meta.env.PUBLIC_ALGOLIA_APP_ID;
+const apiKey = import.meta.env.PUBLIC_ALGOLIA_API_KEY;
 
-const searchClient = algolia(
-  import.meta.env.REACT_APP_ALGOLIA_APP_ID,
-  import.meta.env.REACT_APP_ALGOLIA_API_KEY
-);
+const searchClient = algoliasearch(appId, apiKey);
+
+const Hit = ({ hit }) => {
+  if (!hit) return;
+  return (
+    <article>
+      <div className="hit-name">
+        <Highlight attribute="name" hit={hit} />
+      </div>
+    </article>
+  );
+};
 
 export function Search() {
   return (
-    <InstantSearch searchClient={searchClient} indexName="instant_search">
-      <SearchBox />
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="ecommerce"
+      future={{ preserveSharedStateOnUnmount: true }}
+    >
+      <Configure hitsPerPage={5} />
+      <div className="ais-InstantSearch">
+        <SearchBox />
+        <Hits hitComponent={Hit} />
+      </div>
     </InstantSearch>
   );
 }

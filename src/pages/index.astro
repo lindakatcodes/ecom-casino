@@ -1,6 +1,10 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import { Search } from "../components/Search";
+import { GET } from "./api/getProducts.json.ts";
+
+let response = await GET();
+const data = await response.json();
 ---
 
 <MainLayout>
