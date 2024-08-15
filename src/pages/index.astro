@@ -1,0 +1,31 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { Search } from "../components/Search";
+---
+
+<MainLayout>
+  <header>
+    <h1>E-Com Casino</h1>
+    <Search client:load />
+  </header>
+  <main>
+    <p>
+      Welcome to the E-Com Casino! We have all the games you love, from slots to
+      poker to blackjack. We even have a few games you've never heard of. Come
+      on in and try your luck!
+    </p>
+  </main>
+</MainLayout>
+
+<style>
+  h1 {
+    font-family: "Cinzel Decorative", system-ui;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  p {
+    padding: 0.5rem;
+  }
+</style>

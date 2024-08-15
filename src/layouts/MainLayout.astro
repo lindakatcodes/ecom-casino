@@ -1,0 +1,37 @@
+---
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/cinzel-decorative/400.css";
+import "@fontsource/cinzel-decorative/700.css";
+import "../reset.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>ECom Casino</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  :root {
+    --dark: #0f172a;
+    --mid: #94a3b8;
+    --light: #f1f5f9;
+    --red: #b70101;
+    --green: #145739;
+    --blue: #0d355f;
+  }
+
+  body {
+    font-family: "IBM Plex Sans", sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+  }
+</style>
