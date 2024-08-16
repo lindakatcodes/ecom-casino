@@ -5,7 +5,7 @@ const { product } = Astro.props;
 ---
 
 <article>
-  <a href=`/product/${product.id}`>
+  <a href=`/product/${product._id}`>
     <div class="image">
       <Image
         src={product.images[0].url}

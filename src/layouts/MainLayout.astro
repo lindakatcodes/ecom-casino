@@ -4,6 +4,8 @@ import "@fontsource/ibm-plex-sans/700.css";
 import "@fontsource/cinzel-decorative/400.css";
 import "@fontsource/cinzel-decorative/700.css";
 import "../reset.css";
+
+import ShoppingCart from "astro-heroicons/outline/ShoppingCart.astro";
 ---
 
 <html lang="en">
@@ -15,6 +17,13 @@ import "../reset.css";
     <title>ECom Casino</title>
   </head>
   <body>
+    <header>
+      <a href="/"><h1>E-Com Casino</h1></a>
+      <a href="/cart" class="cart">
+        <ShoppingCart class="cart-icon" />
+        <p>Cart</p>
+      </a>
+    </header>
     <slot />
   </body>
 </html>
@@ -33,5 +42,39 @@ import "../reset.css";
     font-family: "IBM Plex Sans", sans-serif;
     background-color: var(--light);
     color: var(--dark);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--dark);
+  }
+
+  h1 {
+    font-family: "Cinzel Decorative", system-ui;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-basis: 10%;
+    color: var(--dark);
+  }
+
+  .cart-icon {
+    inline-size: 1.25rem;
   }
 </style>

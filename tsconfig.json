@@ -9,7 +9,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@api/*": ["src/pages/api/*"],
       "@icons/*": ["src/icons/*"],
-      "@vars/*": ["src/constants.ts"]
+      "@vars/*": ["src/constants.ts"],
+      "@styles/*": ["src/styles/*"]
     }
   }
 }

@@ -1,0 +1,55 @@
+---
+import { GET } from "@api/getProducts.json.ts";
+import { ImageSlider } from "@components/ImageSlider";
+import MainLayout from "@layouts/MainLayout.astro";
+import type { ImageItem, Product } from "@vars/*";
+
+export async function getStaticPaths() {
+  let response = await GET();
+  const products = await response.json();
+  const paths = products.map((product: Product) => ({
+    params: { id: product._id },
+  }));
+
+  return paths;
+}
+
+const { id } = Astro.params;
+let response = await GET();
+const products = await response.json();
+const product: Product = products.find(
+  (product: Product) => product._id === id
+);
+---
+
+<MainLayout>
+  <main>
+    <div class="img-slider">
+      <ImageSlider images={product.images} client:load />
+    </div>
+    <div class="info">
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>${product.price}</p>
+      <button>Add to Cart</button>
+    </div>
+  </main>
+</MainLayout>
+
+<style>
+  main {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .img-slider {
+    flex-basis: 50%;
+  }
+
+  h1 {
+    font-family: "Cinzel Decorative", system-ui;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+</style>

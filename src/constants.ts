@@ -3,11 +3,13 @@ export interface Product {
   name: string;
   description: string;
   upc: string;
-  images: Array<{
-    title: string;
-    description: string;
-    url: string;
-  }>;
+  images: Array<ImageItem>;
   category: string;
   price: string;
+}
+
+export interface ImageItem {
+  title: string;
+  description: string;
+  url: string;
 }

@@ -1,7 +1,6 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 import { GET } from "@api/getProducts.json.ts";
-import ShoppingCart from "astro-heroicons/outline/ShoppingCart.astro";
 import type { Product } from "@vars/constants";
 import ProductCard from "@components/ProductCard.astro";
 
@@ -16,13 +15,6 @@ const categoryList = [...singleCats];
 ---
 
 <MainLayout>
-  <header>
-    <h1>E-Com Casino</h1>
-    <a href="/cart" class="cart">
-      <ShoppingCart class="cart-icon" />
-      <p>Cart</p>
-    </a>
-  </header>
   <div class="body-wrapper">
     <aside>
       <h2>Categories</h2>
@@ -43,35 +35,6 @@ const categoryList = [...singleCats];
 </MainLayout>
 
 <style>
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 2rem;
-  }
-
-  h1 {
-    font-family: "Cinzel Decorative", system-ui;
-    font-weight: bold;
-    font-size: 2.5rem;
-    text-align: center;
-  }
-
-  .cart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    flex-basis: 10%;
-    color: var(--dark);
-  }
-
-  .cart-icon {
-    inline-size: 1.25rem;
-  }
-
   .body-wrapper {
     display: grid;
     grid-template-columns: 0.5fr 3fr;
