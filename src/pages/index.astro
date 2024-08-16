@@ -1,27 +1,56 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-import { Search } from "../components/Search";
-import { GET } from "./api/getProducts.json.ts";
+import MainLayout from "@layouts/MainLayout.astro";
+import { GET } from "@api/getProducts.json.ts";
+import ShoppingCart from "astro-heroicons/outline/ShoppingCart.astro";
+import type { Product } from "@vars/constants";
+import ProductCard from "@components/ProductCard.astro";
 
 let response = await GET();
-const data = await response.json();
+const products = await response.json();
+
+const singleCats = new Set(
+  products.map((product: Product) => product.category)
+);
+
+const categoryList = [...singleCats];
 ---
 
 <MainLayout>
   <header>
     <h1>E-Com Casino</h1>
-    <Search client:load />
+    <a href="/cart" class="cart">
+      <ShoppingCart class="cart-icon" />
+      <p>Cart</p>
+    </a>
   </header>
-  <main>
-    <p>
-      Welcome to the E-Com Casino! We have all the games you love, from slots to
-      poker to blackjack. We even have a few games you've never heard of. Come
-      on in and try your luck!
-    </p>
-  </main>
+  <div class="body-wrapper">
+    <aside>
+      <h2>Categories</h2>
+      {categoryList.map((category) => <p>{category}</p>)}
+    </aside>
+    <main>
+      <ul>
+        {
+          products.map((product: Product) => (
+            <li>
+              <ProductCard product={product} />
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </div>
 </MainLayout>
 
 <style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+  }
+
   h1 {
     font-family: "Cinzel Decorative", system-ui;
     font-weight: bold;
@@ -29,7 +58,39 @@ const data = await response.json();
     text-align: center;
   }
 
-  p {
-    padding: 0.5rem;
+  .cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-basis: 10%;
+    color: var(--dark);
+  }
+
+  .cart-icon {
+    inline-size: 1.25rem;
+  }
+
+  .body-wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 3fr;
+    align-items: start;
+    gap: 2rem;
+    padding: 2rem;
+    position: relative;
+  }
+
+  aside {
+    position: sticky;
+    top: 2.5rem;
+  }
+
+  ul {
+    display: grid;
+    list-style-type: none;
+    padding-inline: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+    gap: 1rem;
   }
 </style>

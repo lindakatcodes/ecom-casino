@@ -1,24 +1,11 @@
 import { faker } from "@faker-js/faker";
-
-interface Product {
-  _id: string;
-  productname: string;
-  productdescription: string;
-  upc: string;
-  images: Array<{
-    title: string;
-    description: string;
-    url: string;
-  }>;
-  category: string;
-  price: string;
-}
+import type { Product } from "@vars/constants";
 
 function createRandomProduct(): Product {
   return {
     _id: faker.string.uuid(),
-    productname: faker.commerce.productName(),
-    productdescription: faker.commerce.productDescription(),
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
     upc: faker.commerce.isbn(),
     images: [
       {
