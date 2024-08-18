@@ -2,13 +2,14 @@
 import { Image } from "astro:assets";
 
 const { product } = Astro.props;
+const imageArray = JSON.parse(product.images);
 ---
 
 <article>
-  <a href=`/product/${product._id}`>
+  <a href=`/product/${product.id}`>
     <div class="image">
       <Image
-        src={product.images[0].url}
+        src={imageArray[0].url}
         alt={product.name}
         width="325"
         height="325"

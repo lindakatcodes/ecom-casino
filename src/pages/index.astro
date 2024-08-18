@@ -4,13 +4,12 @@ import { GET } from "@api/getProducts.json.ts";
 import type { Product } from "@vars/constants";
 import ProductCard from "@components/ProductCard.astro";
 
-let response = await GET();
-const products = await response.json();
+let productResponse = await GET();
+const allProducts = await productResponse.json();
 
 const singleCats = new Set(
-  products.map((product: Product) => product.category)
+  allProducts.map((product: Product) => product.category)
 );
-
 const categoryList = [...singleCats];
 ---
 
@@ -23,7 +22,7 @@ const categoryList = [...singleCats];
     <main>
       <ul>
         {
-          products.map((product: Product) => (
+          allProducts.map((product: Product) => (
             <li>
               <ProductCard product={product} />
             </li>

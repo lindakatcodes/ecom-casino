@@ -1,31 +1,21 @@
 ---
-import { GET } from "@api/getProducts.json.ts";
+import { db, eq, Products } from "astro:db";
 import { ImageSlider } from "@components/ImageSlider";
 import MainLayout from "@layouts/MainLayout.astro";
-import type { ImageItem, Product } from "@vars/*";
-
-export async function getStaticPaths() {
-  let response = await GET();
-  const products = await response.json();
-  const paths = products.map((product: Product) => ({
-    params: { id: product._id },
-  }));
-
-  return paths;
-}
 
 const { id } = Astro.params;
-let response = await GET();
-const products = await response.json();
-const product: Product = products.find(
-  (product: Product) => product._id === id
-);
+const productArray = await db
+  .select()
+  .from(Products)
+  .where(eq(Products.id, id));
+const product = productArray[0];
+const productImages = JSON.parse(product.images);
 ---
 
 <MainLayout>
   <main>
     <div class="img-slider">
-      <ImageSlider images={product.images} client:load />
+      <ImageSlider images={productImages} client:load />
     </div>
     <div class="info">
       <h1>{product.name}</h1>
